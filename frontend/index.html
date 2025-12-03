@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shahhosseini MiniApp</title>
+
+  <!-- Telegram WebApp SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    body {
+      background: var(--tg-theme-bg-color, #ffffff);
+      color: var(--tg-theme-text-color, #222222);
+      font-family: sans-serif;
+      padding: 20px;
+    }
+
+    .box {
+      padding: 15px;
+      background: #f0f0f0;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Shahhosseini MiniApp</h2>
+
+  <div class="box">
+    <p><b>User ID:</b> <span id="user-id">Loading...</span></p>
+    <p><b>Init Data:</b></p>
+    <pre id="init-data">Loading...</pre>
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.expand();  // full height mode
+
+    // نمایش initData واقعی
+    document.getElementById("init-data").textContent = tg.initDataUnsafe
+      ? JSON.stringify(tg.initDataUnsafe, null, 2)
+      : "No initData";
+
+    document.getElementById("user-id").textContent = tg.initDataUnsafe?.user?.id || "N/A";
+  </script>
+
+</body>
+</html>
+
